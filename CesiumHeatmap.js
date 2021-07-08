@@ -76,14 +76,19 @@
 
 			return text;
 		};
+		var WMP
+		try{
+			 WMP = new Cesium.WebMercatorProjection();
+		}catch(e){
 
-		var WMP = new Cesium.WebMercatorProjection();
+		}
 
 		/*  Convert a WGS84 location into a mercator location
 		 *
 		 *  p: the WGS84 location like {x: lon, y: lat}
 		 */
 		CesiumHeatmap.wgs84ToMercator = function (p) {
+			if(!WMP){ WMP = new Cesium.WebMercatorProjection();}
 			var mp = WMP.project(Cesium.Cartographic.fromDegrees(p.x, p.y));
 			return {
 				x: mp.x,
@@ -96,6 +101,7 @@
 		 *  bb: the WGS84 bounding box like {north, east, south, west}
 		 */
 		CesiumHeatmap.wgs84ToMercatorBB = function (bb) {
+			if(!WMP){ WMP = new Cesium.WebMercatorProjection();}
 			var sw = WMP.project(Cesium.Cartographic.fromDegrees(bb.west, bb.south));
 			var ne = WMP.project(Cesium.Cartographic.fromDegrees(bb.east, bb.north));
 			return {
@@ -111,6 +117,7 @@
 		 *  p: the mercator lcation like {x, y}
 		 */
 		CesiumHeatmap.mercatorToWgs84 = function (p) {
+			if(!WMP){ WMP = new Cesium.WebMercatorProjection();}
 			var wp = WMP.unproject(new Cesium.Cartesian3(p.x, p.y));
 			return {
 				x: wp.longitude,
@@ -123,6 +130,7 @@
 		 *  bb: the mercator bounding box like {north, east, south, west}
 		 */
 		CesiumHeatmap.mercatorToWgs84BB = function (bb) {
+			if(!WMP){ WMP = new Cesium.WebMercatorProjection();}
 			var sw = WMP.unproject(new Cesium.Cartesian3(bb.west, bb.south));
 			var ne = WMP.unproject(new Cesium.Cartesian3(bb.east, bb.north));
 			return {
