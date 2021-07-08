@@ -1,5 +1,5 @@
 {
-  "name": "cesium-heatmap",
+  "name": "cesium-heatmap-tool",
   "version": "0.0.4",
   "description": "A helper to add heatmaps (using heatmap.js) to CesiumJS",
   "main": "CesiumHeatmap.js",
